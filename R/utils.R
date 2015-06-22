@@ -39,26 +39,6 @@ load_nwea <- function(data_folder) {
 #' @examples
 #'
 
-id_prepost <- function(df, group_var = c('StudentFirstName', 'StudentLastName'),
-                       date_var = 'test_date') {
-
-  df <- dplyr::group_by_(df, .dots = group_var)
-  df <- dplyr::mutate_(df,
-                       first = lazyeval::interp(~min(v), v = as.name(date_var)),
-                       last = lazyeval::interp(~max(v), v = as.name(date_var)))
-  df <- dplyr::ungroup(df)
-  df <- as.data.frame(df)
-
-  # Assign pre / post values to first / last date taken
-
-  df$prepost[df[, date_var] == df$first & df$first != df$last] <- 'pre'
-  df$prepost[df[, date_var] == df$last & df$first != df$last] <- 'post'
-  df$prepost <- factor(df$prepost, levels = c('pre', 'post'))
-  # Return dataframe
-  return(df)
-}
-
-
 #' compute_change()
 #'
 #' This is a helper function that computes change in score between pre and post test. The data must be pre-processed by the followng function: id_prepost()
