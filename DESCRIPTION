@@ -9,5 +9,8 @@ Description: More about what it does (maybe more than one line)
 License: What license is it under?
 LazyData: TRUE
 Imports: plyr,
-    testthat,
-    assertthat
+    assertthat,
+    stringr,
+    dplyr,
+    tidyr,
+    lubridate
