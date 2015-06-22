@@ -29,45 +29,11 @@ df <- fuzzy_join(x = nwea, y = eto, by = 'my_id')
 
 # Format data for upload-----------------------------------------------------
 
+df <- format_nwea(df)
 
+# Save as a .csv
 
-
-
-# Baseline analysis -------------------------------------------------------
-baseline <-
-  rit %>% filter(school_year %in% c('2014-2015'),
-                 term %in% c('Fall'))
-
-p <- ggplot(data = baseline,
-            aes(fill = StudentEthnicGroup, x = TestRITScore))
-#p <- p + coord_flip()
-#p <- p + geom_boxplot(varwidth = TRUE)
-p <- p + geom_density()
-p
-
-df2 <-
-  df %>% select(StudentEthnicGroup, StudentGender, Grade, TestRITScore)
-ggpairs(df2)
-
-
-# Growth analysis ---------------------------------------------------------
-
-growth <-
-  rit %>% filter(school_year %in% c('2014-2015'))
-
-p <- ggplot(data = growth,
-            aes(x = term, fill = term, y = TestRITScore))
-p <- p + coord_flip()
-p <- p + geom_boxplot()
-p
-
-
-# Growth analysis bis -----------------------------------------------------
-
-rit <- id_prepost(rit)
-rit <- filter(rit, !is.na(prepost))
-
-
+export_nwea(df)
 
 
 

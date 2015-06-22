@@ -1,3 +1,5 @@
+#' format_nwea()
+#'
 #' Helper function to format NWEA data for upload in ETO
 #' @param df dataframe: NWEA data exported from the website
 #' @return dataframe
@@ -15,22 +17,19 @@ format_nwea <- function(df) {
   df <- df[, keep]
   
   # Add addtional columns
-  df$site <- NA
-  df$program <- NA
-  df$update <-NA
+  df$site <- 'Latin American Youth Center'
+  df$program <- 'CA - Full Roster'
+  df$update <-'I'
   df$response_id <- NA
   
   # Reorder columns
   new_order <- c("id", "fname", "dob", "site", "program", "TestStartDate", "update", "response_id", "school_year", "term", "TestRITScore")
   df <- df[, new_order]
   
-  # Get name for csv file
-  assertthat::assert_that(length(unique(df$term)) == 1)
-  assertthat::assert_that(length(unique(df$school_year)) == 1)
-  csv_name <- tolower(paste('nwea', unique(df$term), unique(df$school_year), '.csv', sep = '_'))
-  
   # rename columns for upload
   colnames(df) <- c("Participant Identifier",	"First Name",	"DOB",	"Site Name",	"Program Name",	"Response Date",	"Update or Insert",
                     "Response ID",	"School year_3247",	"Term_3245",	"RIT Reading score_3246")
+  
+  return(df)
   
   }
