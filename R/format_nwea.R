@@ -12,6 +12,9 @@
 
 format_nwea <- function(df) {
   
+  # Remove unmatched records
+  df <- df[df$match_status != 'unmatched', ]
+  
   # select subset of columns to upload
   keep <- c("id", "fname", "dob", "TestStartDate", "school_year", "term", "TestRITScore")
   df <- df[, keep]
