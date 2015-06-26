@@ -30,14 +30,6 @@ load_nwea <- function(data_folder) {
   return(df)
 }
 
-#' id_prepost()
-#'
-#' This is a helper function that identifies 'pre' and 'post' test based on the date the test was taken.
-#' @param df dataframe: a dataframe containing longitudinal data.
-#' @return dataframe
-#' @export
-#' @examples
-#'
 
 #' compute_change()
 #'
@@ -47,7 +39,6 @@ load_nwea <- function(data_folder) {
 #' @return dataframe
 #' @export
 #' @import dplyr
-#' @examples
 
 
 compute_change <- function(df, col = c('subject_id', 'prepost', 'score')) {
