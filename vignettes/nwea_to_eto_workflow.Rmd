@@ -93,4 +93,5 @@ The `export_nwea()` will automatically save the dataset in the active working di
 export_nwea(df)
 ```
 
-
+## STEP 7: Save file as Excel and upload it in ETO
+ETO doesn't support .csv files. It is necessary to open the newly created .csv file, and save it as an .xls file before finalizing the upload in ETO.
