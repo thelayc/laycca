@@ -1,6 +1,5 @@
 ---
-title: "NWEA to ETO data transfer"
-author: "Tony Fujs"
+title: "NWEA to ETO data transfer workflow"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
