@@ -13,4 +13,7 @@ Imports: plyr,
     stringr,
     dplyr,
     tidyr,
-    lubridate
+    lubridate,
+    assertive
+Suggests: knitr
+VignetteBuilder: knitr

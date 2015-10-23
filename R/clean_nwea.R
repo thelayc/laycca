@@ -16,7 +16,7 @@ clean_nwea <- function(df) {
     )
   
   if (!identical(expected_columns, colnames(df))) {
-    warning(
+    stop(
       cat(
         "Column headers are not as expected\nExpected column headers are:\n", expected_columns, "\n\n"
       )
