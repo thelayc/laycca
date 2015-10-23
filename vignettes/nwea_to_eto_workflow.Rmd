@@ -1,0 +1,97 @@
+---
+title: "NWEA to ETO data transfer workflow"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+At the end of each trimester, CA students' NWEA scores are exported from the on-line NWEA data base into ETO. This tranfer can easily be done by following these steps:
+
+## STEP 1: Get the data from ETO and the NWEA database
+### Get the students list from ETO
+
+To obtain this list:
+
+1. Go to the "CA - Full Roster" homepage in ETO
+1. Click on "CA REPORT: Raw Demographics"
+1. At the prompt, select "CA - Full Roster" for the "Program Name" field. Leave the other fields blank.
+1. Click on the "students_list" tab 
+1. Save the the "students_list" report as an Excel file on your computer
+1. Open it, and save it as a .csv file. __Do not skip 5, and save it directly as a .csv file, it would break the report formatting.__
+
+### Get the students' NWEA scores from the NWEA on-line database
+__To be completed__
+
+## STEP 2: Load data into R
+If you have never used the laycUtils and laycca packages before, uncomment, and run the following 2 lines of code:
+
+```{r, eval = FALSE}
+
+# devtools::install_github('thelayc/laycUtils', build_vignettes = TRUE)
+# devtools::install_github('thelayc/laycca', build_vignettes = TRUE)
+library(laycUtils)
+library(laycca)
+nwea <- load_csv("./path/to/nwea_scores.csv") # Edit the path to your .csv file as needed
+eto <- load_csv("./path/to/students_list.csv") # Edit the path to your .csv file as needed
+```
+
+The __nwea__ dataset should have the following structure and column names:
+
+```{r, echo = FALSE}
+library(laycUtils)
+library(laycca)
+data(nwea_scores)
+nwea <- nwea_scores
+dplyr::tbl_df(nwea)
+rm(nwea_scores)
+```
+
+The __eto__ dataset should have the following structure and column names:
+
+```{r, echo = FALSE}
+data(students_list)
+eto <- students_list
+dplyr::tbl_df(eto)
+rm(students_list)
+```
+
+## STEP 3: Conduct some basic data cleaning
+
+```{r}
+nwea <- clean_nwea(nwea)
+```
+
+## STEP 4: Merge both dataset
+
+Since the 2 datasets don't share a common ID, we will create a custom id based on students' first and last name.
+
+```{r}
+# Create custom id
+nwea$custom_id <- create_id(nwea, var = c("StudentLastName", "StudentFirstName"))
+eto$custom_id <- create_id(eto, var = c("lname", "fname"))
+nwea$custom_id
+
+# Merge
+df <- fuzzy_join(x = nwea, y = eto, by = 'custom_id')
+head(df)
+
+```
+
+## STEP 5: Format data for upload in ETO
+```{r}
+df <- format_nwea(df)
+head(df)
+```
+
+## STEP 6: Save as .csv
+The `export_nwea()` will automatically save the dataset in the active working directory, and name it.
+
+```{r, eval = FALSE}
+export_nwea(df)
+```
+
+## STEP 7: Save file as Excel and upload it in ETO
+ETO doesn't support .csv files. It is necessary to open the newly created .csv file, and save it as an .xls file before finalizing the upload in ETO.

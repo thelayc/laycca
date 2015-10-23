@@ -15,5 +15,6 @@ Imports: plyr,
     tidyr,
     lubridate,
     assertive
-Suggests: knitr
+Suggests: knitr,
+    rmarkdown
 VignetteBuilder: knitr
