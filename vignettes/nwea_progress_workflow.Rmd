@@ -13,6 +13,7 @@ vignette: >
 
 To obtain this list:
 
+1. Go to ETO: Reports > View reports
 1. Run the "[LAYCCA] students_roster" report in ETO
 1. At the prompt, select the date range you are interested in.
 1. Click on "students_list" tab
@@ -45,7 +46,7 @@ The __nwea__ dataset should have the following structure and column names:
 library(laycUtils)
 library(laycca)
 data(nwea_eto)
-nwea <- nwea_scores
+nwea <- nwea_eto
 dplyr::tbl_df(nwea)
 rm(nwea_eto)
 ```
@@ -58,41 +59,3 @@ students <- students_list
 dplyr::tbl_df(students)
 rm(students_list)
 ```
-
-## STEP 3: Conduct some basic data cleaning
-
-```{r}
-nwea <- clean_nwea(nwea)
-```
-
-## STEP 4: Merge both dataset
-
-Since the 2 datasets don't share a common ID, we will create a custom id based on students' first and last name.
-
-```{r}
-# Create custom id
-nwea$custom_id <- create_id(nwea, var = c("StudentLastName", "StudentFirstName"))
-students$custom_id <- create_id(students, var = c("lname", "fname"))
-nwea$custom_id
-
-# Merge
-df <- fuzzy_join(x = nwea, y = students, by = 'custom_id')
-head(df)
-
-```
-
-## STEP 5: Format data for upload in ETO
-```{r}
-df <- format_nwea(df)
-head(df)
-```
-
-## STEP 6: Save as .csv
-The `export_nwea()` will automatically save the dataset in the active working directory, and name it.
-
-```{r, eval = FALSE}
-export_nwea(df)
-```
-
-## STEP 7: Save file as Excel and upload it in ETO
-ETO doesn't support .csv files. It is necessary to open the newly created .csv file, and save it as an .xls file before finalizing the upload in ETO.
