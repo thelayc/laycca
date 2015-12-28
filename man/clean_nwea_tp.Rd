@@ -13,6 +13,16 @@ clean_nwea_tp(df, expected_columns = c("subject_id", "name", "tp_name",
 }
 \arguments{
 \item{df}{dataframe: NWEA data exported from ETO}
+
+\item{expected_columns}{character vector: Expected column names for df}
+
+\item{kept_columns}{character vector: Column names from df to keep}
+
+\item{expected_terms}{character vector: Expected valid value for the "term" column in df}
+
+\item{score_min}{numeric: minimum accepted value for the "rit" column}
+
+\item{score_max}{numeric: maximum accepted value for the "rit" column}
 }
 \value{
 dataframe

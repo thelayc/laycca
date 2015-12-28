@@ -1,5 +1,10 @@
 #' Clean NWEA data exported from ETO ("[Admin] raw_touchpoint_report_detailed")
 #' @param df dataframe: NWEA data exported from ETO
+#' @param expected_columns character vector: Expected column names for df
+#' @param kept_columns character vector: Column names from df to keep
+#' @param expected_terms character vector: Expected valid value for the "term" column in df
+#' @param score_min numeric: minimum accepted value for the "rit" column
+#' @param score_max numeric: maximum accepted value for the "rit" column
 #' @return dataframe
 #' @export
 #' @examples

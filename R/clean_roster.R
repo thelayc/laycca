@@ -1,6 +1,8 @@
 #' Clean roster data prior to merging with NWEA data
 #' The data set to be cleaned is an export from the "[LAYCCA] students_roster" report
 #' @param df dataframe: NWEA data exported from the website
+#' @param expected_columns character vector: Expected column names for df
+#' @param kept_columns character vector: Column names from df to keep
 #' @return dataframe
 #' @export
 #' @examples
@@ -17,6 +19,9 @@ clean_roster <- function(df,
   assertthat::assert_that(is.data.frame(df))
   assertthat::validate_that(length(colnames(df)) == length(expected_columns))
   assertthat::validate_that(all.equal(sort(colnames(df)), sort(expected_columns)))
+  
+  # Basic formatting
+  df <- laycUtils::format_data(df)
 
   # Filter out unneccessary columns
   df <- df[, colnames(df) %in% kept_columns]

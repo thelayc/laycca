@@ -11,6 +11,10 @@ clean_roster(df, expected_columns = c("id", "subject_id", "fname", "lname",
 }
 \arguments{
 \item{df}{dataframe: NWEA data exported from the website}
+
+\item{expected_columns}{character vector: Expected column names for df}
+
+\item{kept_columns}{character vector: Column names from df to keep}
 }
 \value{
 dataframe
