@@ -8,7 +8,7 @@
 #' nwea <- load_nwea(data_folder = './path/to/data_folder')
 # Plot individual change
 
-plot_individual_change <- function(df, my_palette = c('#2CA02C', '#FF7F0E', '#D62728')) { 
+plot_individual_scores <- function(df, my_palette = c('#2CA02C', '#FF7F0E', '#D62728')) { 
   
   testing_period <- paste(as.character(unique(df$term)), unique(df$school_year))
   my_lab <- paste('RIT Reading score')
