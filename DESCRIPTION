@@ -8,15 +8,16 @@ Maintainer: Who to complain to <yourfault@somewhere.net>
 Description: More about what it does (maybe more than one line)
 License: What license is it under?
 LazyData: TRUE
-Imports:
+Imports: 
     plyr,
     assertthat,
     stringr,
     dplyr,
     tidyr,
     lubridate,
-    assertive
-Suggests:
+    assertive,
+    scales
+Suggests: 
     knitr,
     rmarkdown
 VignetteBuilder: knitr

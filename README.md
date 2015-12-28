@@ -9,3 +9,5 @@ move hard coded values to function's arguments
 check what is the technically valid RIT Reading score range
 Include the numeric checks in their own function
 Add a series of check that verifies if date is within school-year / term
+* Benchmark data
+Add benchmark data for RIT scores
