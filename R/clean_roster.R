@@ -19,7 +19,7 @@ clean_roster <- function(df,
   assertthat::validate_that(all.equal(sort(colnames(df)), sort(expected_columns)))
 
   # Filter out unneccessary columns
-  df <- df[, colnames(df) %in% keep]
+  df <- df[, colnames(df) %in% kept_columns]
   
   # Filter out duplicated rows
   df <- df[!duplicated(df), ]
