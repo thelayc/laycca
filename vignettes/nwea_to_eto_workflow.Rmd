@@ -60,7 +60,7 @@ rm(students_list)
 
 ```{r}
 nwea <- clean_nwea(nwea)
-eto <- clean_eto(eto)
+eto <- clean_roster(eto)
 ```
 
 ## STEP 4: Merge both dataset
