@@ -4,16 +4,7 @@
 \name{norms_status_2015}
 \alias{norms_status_2015}
 \title{NWEA Norms data 2015 (status)}
-\format{Data frame with columns
-\describe{
-\item{season}{Term Possible Values: 4 = Beginning of year (Fall)
-1 = Middle of year (Winter) 2 = End of year (Spring)
-3 = Norms not available for this season (Summer)"}
-\item{grade}{Grade}
-\item{subject}{Subject}
-\item{student_pctile}{Student percentile}
-\item{rit}{RIT score}
-}}
+\format{An object of class \code{data.frame} with 11880 rows and 5 columns.}
 \source{
 NWEA, Northwest Evaluation Association,
  \url{https://legacysupport.nwea.org/support/article/norms-study-resources}
@@ -22,8 +13,7 @@ NWEA, Northwest Evaluation Association,
 norms_status_2015
 }
 \description{
-On-time data for all flights that departed NYC (i.e. JFK, LGA or EWR) in
-2013.
+Data from the RIT Scale Norms Study 2015
 }
 \keyword{datasets}
 
