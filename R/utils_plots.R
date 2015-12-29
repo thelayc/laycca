@@ -22,7 +22,6 @@ plot_individual_scores <- function(df, my_palette = c('#2CA02C', '#FF7F0E', '#D6
   ))
   p <- p + geom_point(size = rel(4))
   p <- p + coord_flip()
-  p <- p + ggthemes::theme_hc()
   p <- p + scale_color_gradient2(low = scales::muted('#D62728'), 
                                  mid = 'grey', 
                                  high = scales::muted('#2CA02C'),
@@ -32,7 +31,8 @@ plot_individual_scores <- function(df, my_palette = c('#2CA02C', '#FF7F0E', '#D6
   p <- p + theme(
     axis.ticks.y = element_blank(),
     axis.title.y = element_blank(),
-    panel.grid.major = element_blank()
+    panel.grid.major = element_blank(),
+    panel.background = element_blank()
   )
 }
 
