@@ -116,15 +116,15 @@ recode_change <- function(vector) {
 #' get_iqr(df)
 #' 
 get_iqr <- function(df) {
-  q25 <- df$rit[df$percentile == 25]
-  q50 <- df$rit[df$percentile == 50]
-  q75 <- df$rit[df$percentile == 75]
+  q25 <- df$rit[df$student_pctile == 25]
+  q50 <- df$rit[df$student_pctile == 50]
+  q75 <- df$rit[df$student_pctile == 75]
   iqr <- q75 - q25
   my_min <- q25 - 1.5 * iqr
   my_max <- q75 + 1.5 * iqr
   name <- "benchmark"
   
-  out <- data.frame(name, my_min, my_max, q25, q50, q75)
+  out <- data.frame(name, my_min, my_max, q25, q50, q75, stringsAsFactors = FALSE)
   
   return(out)
 }
