@@ -16,7 +16,8 @@ Imports:
     tidyr,
     lubridate,
     assertive,
-    scales
+    scales,
+    ggthemes
 Suggests: 
     knitr,
     rmarkdown
