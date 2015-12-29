@@ -2,6 +2,7 @@
 #'
 #' plot RIT reading score for each students on the roster
 #' @param df data.frame: Name of the data frame containing NWEA data
+#' @import ggplot2
 #' @return ggplot
 #' @export
 #' @examples
