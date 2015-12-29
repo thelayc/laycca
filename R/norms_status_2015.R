@@ -19,8 +19,7 @@
 #' 3 = Language Usage
 #' 4 = General science
 #' As of 2015, Science Concepts and Processes is no longer available}
-#' \item{student_pctile}{Percentile associated with student RIT score for subject, grade, and season
-#' Range = 1-99%}
+#' \item{student_pctile}{Percentile associated with student RIT score for subject, grade, and season Range = 1-99}
 #' \item{rit}{RIT score}
 #' }
 "norms_status_2015"

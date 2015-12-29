@@ -94,56 +94,37 @@ recode_change <- function(vector) {
   return(out)
 }
 
-# #' tidy_tp()
-# #'
-# #' This is a helper function that does some tidying of data exported from ETO through the "[Admin] raw_touchpoint_report_detailed" 
-# #' @param df dataframe: a dataframe
-# #' @param col character vector: name of columns to keep to compute change in scores.
-# #' @return dataframe
-# #' @export
-# #' @import dplyr
-# 
-# tidy_tp <- function(df, tp_name = NULL, program_name = NULL) {
-#   
-#   # CHECK:
-#   assertive::is_data.frame(df) 
-#   assertive::is_character(tp_name) | assertive::is_null(tp_name)
-#   assertive::is_character(program_name) | assertive::is_null(program_name)
-#   
-#   # Remove unused rows
-#   df <- df[df$tp_name == tp_name, ]
-#   df <- df[df$program_name == program_name, ]
-#   # Remove unused columns
-#   select(-tp_name, -question, -question_id, -(answer_weight:program_id)) %>%
-#   tidyr::spread(question_short, answer) ->
-#   nwea
-# 
-# nwea$rit_reading <- as.numeric(nwea$rit_reading)
 
-#' rit_to_grade()
+
+#' get_iqr
+#' Takes a subset of a norms_status data as input. Return a data frame with the necesary
+#' information to create a boxplot.
+#'  
+#' @param df dataframe: Subset of norms_status_xxxx data
 #'
-#' This is a helper function that converts RIT reading scores into grade equivalent. The conversion is based on the NWEA Normative Data Reference  \url{https://www.nwea.org/resources/2015-normative-data/}
-#' @param rit dataframe: a dataframe containing RIT reading scores to be converted
-#' @param ref_table dataframe: reference table to be used for the conversion of RIT scores to grades
-#' @param col character vector: name of columns to keep to compute change in scores.
 #' @return dataframe
 #' @export
-
-rit_to_grade <- function(rit, ref_table) {
-
-rit$grade[rit$rit_reading > ref_table$rit[10]] <- ref_table$grade[11]
-rit$grade[rit$rit_reading <= ref_table$rit[10]] <- ref_table$grade[10]
-rit$grade[rit$rit_reading <= ref_table$rit[9]] <- ref_table$grade[9]
-rit$grade[rit$rit_reading <= ref_table$rit[8]] <- ref_table$grade[8]
-rit$grade[rit$rit_reading <= ref_table$rit[7]] <- ref_table$grade[7]
-rit$grade[rit$rit_reading <= ref_table$rit[6]] <- ref_table$grade[6]
-rit$grade[rit$rit_reading <= ref_table$rit[5]] <- ref_table$grade[5]
-rit$grade[rit$rit_reading <= ref_table$rit[4]] <- ref_table$grade[4]
-rit$grade[rit$rit_reading <= ref_table$rit[3]] <- ref_table$grade[3]
-rit$grade[rit$rit_reading <= ref_table$rit[2]] <- ref_table$grade[2]
-rit$grade[rit$rit_reading <= ref_table$rit[1]] <- ref_table$grade[1]
-
-rit$grade <- as.numeric(rit$grade)
-
-return(rit)
+#'
+#' @examples
+#' library(dplyr)
+#' data(norms_status_2015)
+#' df <- norms_status_2015 %>%
+#'  filter(season == 4) %>%
+#'  filter(grade == 11) %>% 
+#'  filter(subject == 2)
+#' 
+#' get_iqr(df)
+#' 
+get_iqr <- function(df) {
+  q25 <- df$rit[df$percentile == 25]
+  q50 <- df$rit[df$percentile == 50]
+  q75 <- df$rit[df$percentile == 75]
+  iqr <- q75 - q25
+  my_min <- q25 - 1.5 * iqr
+  my_max <- q75 + 1.5 * iqr
+  name <- "benchmark"
+  
+  out <- data.frame(name, my_min, my_max, q25, q50, q75)
+  
+  return(out)
 }
