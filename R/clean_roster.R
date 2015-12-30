@@ -20,9 +20,6 @@ clean_roster <- function(df,
   assertthat::validate_that(length(colnames(df)) == length(expected_columns))
   assertthat::validate_that(all.equal(sort(colnames(df)), sort(expected_columns)))
   
-  # Basic formatting
-  df <- laycUtils::format_data(df)
-
   # Filter out unneccessary columns
   df <- df[, colnames(df) %in% kept_columns]
   

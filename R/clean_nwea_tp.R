@@ -31,7 +31,6 @@ clean_nwea_tp <- function(df,
   assertthat::validate_that(all.equal(sort(colnames(df)), sort(expected_columns)))
   
   # Clean and format df
-  df <- laycUtils::format_data(df)
   df <- df[, kept_columns]
   df <- tidyr::spread_(data = df, key_col = "question_short", value_col = "answer")
   df$rit <- as.numeric(df$rit_reading)
