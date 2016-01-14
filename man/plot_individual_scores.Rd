@@ -4,18 +4,26 @@
 \alias{plot_individual_scores}
 \title{plot_individual_scores()}
 \usage{
-plot_individual_scores(df, my_palette = c("#2CA02C", "#FF7F0E", "#D62728"))
+plot_individual_scores(df, score = "rit",
+  my_title = paste("Individual students' scores on the RIT reading scale\\n"),
+  my_lab = paste("RIT Reading score"), my_palette = c("#2CA02C", "#FF7F0E",
+  "#D62728"))
 }
 \arguments{
 \item{df}{data.frame: Name of the data frame containing NWEA data}
+
+\item{score}{character: Name of the score column in df}
+
+\item{my_title}{character: Main title of the chart}
+
+\item{my_lab}{character: y-axis title}
+
+\item{my_palette}{character: hexadecimal color values}
 }
 \value{
 ggplot
 }
 \description{
 plot RIT reading score for each students on the roster
-}
-\examples{
-nwea <- load_nwea(data_folder = './path/to/data_folder')
 }
 

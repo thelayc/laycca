@@ -2,30 +2,35 @@
 #'
 #' plot RIT reading score for each students on the roster
 #' @param df data.frame: Name of the data frame containing NWEA data
+#' @param score character: Name of the score column in df
+#' @param my_title character: Main title of the chart
+#' @param my_lab character: y-axis title
+#' @param my_palette character: hexadecimal color values
 #' @import ggplot2
 #' @return ggplot
 #' @export
-#' @examples
-#' nwea <- load_nwea(data_folder = './path/to/data_folder')
-# Plot individual change
 
-plot_individual_scores <- function(df, my_palette = c('#2CA02C', '#FF7F0E', '#D62728')) { 
+
+plot_individual_scores <- function(df,
+                                   score = 'rit',
+                                   my_title = paste("Individual students' scores on the RIT reading scale\n"),
+                                   my_lab = paste('RIT Reading score'),
+                                   my_palette = c('#2CA02C', '#FF7F0E', '#D62728')) { 
   
   testing_period <- paste(as.character(unique(df$term)), unique(df$school_year))
-  my_lab <- paste('RIT Reading score')
-  my_title <- paste("Individual students' scores on the RIT reading scale\n", testing_period)
+  my_title <- paste(my_title, testing_period)
   
-  p <- ggplot(data = df, aes(
-    x = reorder(paste(fname, lname), rit),
-    y = rit,
-    col = rit
+  p <- ggplot(data = df, aes_(
+    x = reorder(paste(fname, lname), as.name(score)),
+    y = as.name(score),
+    col = as.name(score)
   ))
   p <- p + geom_point(size = rel(4))
   p <- p + coord_flip()
-  p <- p + scale_color_gradient2(low = scales::muted('#D62728'), 
-                                 mid = 'grey', 
-                                 high = scales::muted('#2CA02C'),
-                                 midpoint = median(df$rit))
+  p <- p + scale_color_gradient2(low = scales::muted(my_palette[3]), 
+                                 mid = my_palette[2], 
+                                 high = scales::muted(my_palette[1]),
+                                 midpoint = median(df[[as.name(score)]]))
   p <- p + ylab(my_lab)
   p <- p + ggtitle(my_title)
   p <- p + theme(
