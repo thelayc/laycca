@@ -1,0 +1,11 @@
+id,subject_id,fname,lname,dob,ell,ethnicity,race,start,end,days_enrolled
+20001,121,Ayianna,Fake,04/23/1995,yes,Latino,African American,09/03/2014,08/31/2015,362
+20002,122,Caylah,Fake,04/04/1995,yes,Latino,African American,09/03/2014,08/31/2015,362
+20003,123,Motunrayo,Fake,07/20/1995,no,Non-latino,Other***,09/03/2014,08/31/2015,362
+20004,124,Maelynn,Fake,01/21/1995,yes,Latino,Caucasian,09/03/2014,08/31/2015,362
+20005,125,Katalya,Fake,06/19/1995,yes,Latino,Other***,09/03/2014,08/31/2015,362
+20006,126,Rechy,Fake,06/24/1995,yes,Latino,Other***,09/03/2014,08/31/2015,362
+20007,127,Kairav,Fake,10/19/1995,no,Non-latino,Asian,09/03/2014,08/31/2015,362
+20008,128,Haizel,Fake,05/13/1995,yes,Latino,African American,09/03/2014,08/31/2015,362
+20009,129,Makinnley,Fake,07/15/1995,no,Non-latino,Other***,09/03/2014,08/31/2015,362
+20010,130,Destinie,Fake,03/02/1995,yes,Latino,Caucasian,09/03/2014,08/31/2015,362

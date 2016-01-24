@@ -1,0 +1,61 @@
+---
+title: "Students progres as measured by NWEA: workflow"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+## STEP 1: Export NWEA scores from ETO
+### Get the students list from ETO
+
+To obtain this list:
+
+1. Go to ETO: Reports > View reports
+1. Run the "[LAYCCA] students_roster" report in ETO
+1. At the prompt, select the date range you are interested in.
+1. Click on "students_list" tab
+1. Save the table as a text file (.txt extension)
+
+### Get the students' NWEA scores from ETO
+
+To obtain NWEA data
+
+1. Run the "[Admin] raw_touchpoint_report_detailed"
+1. At the prompt, select the date range you are interested in.
+1. Save the data as a text file (.txt extension)
+
+## STEP 2: Load data into R
+If you have never used the laycUtils and laycca packages before, uncomment, and run the following 2 lines of code:
+
+```{r, eval = FALSE}
+
+# devtools::install_github('thelayc/laycUtils', build_vignettes = TRUE)
+# devtools::install_github('thelayc/laycca', build_vignettes = TRUE)
+library(laycUtils)
+library(laycca)
+nwea <- load_txt("./path/to/nwea_scores.txt") # Edit the path to your .csv file as needed
+students <- load_txt("./path/to/students_list.txt") # Edit the path to your .csv file as needed
+```
+
+The __nwea__ dataset should have the following structure and column names:
+
+```{r, echo = FALSE}
+library(laycUtils)
+library(laycca)
+data(nwea_eto)
+nwea <- nwea_eto
+dplyr::tbl_df(nwea)
+rm(nwea_eto)
+```
+
+The __students__ dataset should have the following structure and column names:
+
+```{r, echo = FALSE}
+data(students_list)
+students <- students_list
+dplyr::tbl_df(students)
+rm(students_list)
+```

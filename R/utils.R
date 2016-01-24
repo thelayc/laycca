@@ -75,3 +75,56 @@ compute_change <- function(df, col = c('subject_id', 'prepost', 'score')) {
   # Return dataframe
   return(df)
 }
+
+
+#' recode_change()
+#'
+#' This is a helper function that recode a numeric vector into 3 categories: positive, no change, negative
+#' @param numeric vector
+#' @return factor vector
+#' @export
+
+recode_change <- function(vector) {
+  out <- vector
+  out[vector > 0] <- 'positive'
+  out[vector == 0] <- 'no change'
+  out[vector < 0] <- 'negative'
+  out <- factor(out, levels = c('positive', 'no change', 'negative'))
+  
+  return(out)
+}
+
+
+
+#' get_iqr
+#' Takes a subset of a norms_status data as input. Return a data frame with the necesary
+#' information to create a boxplot.
+#'  
+#' @param df dataframe: Subset of norms_status_xxxx data
+#'
+#' @return dataframe
+#' @export
+#'
+#' @examples
+#' library(dplyr)
+#' data(norms_status_2015)
+#' df <- norms_status_2015 %>%
+#'  filter(season == 4) %>%
+#'  filter(grade == 11) %>% 
+#'  filter(subject == 2)
+#' 
+#' get_iqr(df)
+#' 
+get_iqr <- function(df) {
+  q25 <- df$rit[df$student_pctile == 25]
+  q50 <- df$rit[df$student_pctile == 50]
+  q75 <- df$rit[df$student_pctile == 75]
+  iqr <- q75 - q25
+  my_min <- q25 - 1.5 * iqr
+  my_max <- q75 + 1.5 * iqr
+  name <- "benchmark"
+  
+  out <- data.frame(name, my_min, my_max, q25, q50, q75, stringsAsFactors = FALSE)
+  
+  return(out)
+}

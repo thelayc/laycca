@@ -15,11 +15,9 @@ At the end of each trimester, CA students' NWEA scores are exported from the on-
 
 To obtain this list:
 
-1. Go to the "CA - Full Roster" homepage in ETO
-1. Click on "CA REPORT: Raw Demographics"
-1. At the prompt, select "CA - Full Roster" for the "Program Name" field. Leave the other fields blank.
-1. Click on the "students_list" tab 
-1. Save the the "students_list" report as an Excel file on your computer
+1. Go to ETO: Reports > View reports
+1. Click on "[LAYCCA] students_roster"
+1. At the prompt, leave the date fields blank
 1. Open it, and save it as a .csv file. __Do not skip 5, and save it directly as a .csv file, it would break the report formatting.__
 
 ### Get the students' NWEA scores from the NWEA on-line database
@@ -62,6 +60,7 @@ rm(students_list)
 
 ```{r}
 nwea <- clean_nwea(nwea)
+eto <- clean_roster(eto)
 ```
 
 ## STEP 4: Merge both dataset
@@ -80,7 +79,12 @@ head(df)
 
 ```
 
-## STEP 5: Format data for upload in ETO
+## STEP 5: Review partial matches and unmatched records
+```{r}
+table(df$match_status)
+```
+
+## STEP 6: Format data for upload in ETO
 ```{r}
 df <- format_nwea(df)
 head(df)
