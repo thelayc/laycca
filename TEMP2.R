@@ -7,16 +7,16 @@ library(laycUtils)
 
 # Load data ---------------------------------------------------------------
 
-list.files('./data-raw', full.names = TRUE, recursive = TRUE)
-nwea <- load_csv("./data-raw/raw_nwea/NWEA Tests Fall SY 2012-13.csv")
+files <- list.files('./data-raw', full.names = TRUE, recursive = TRUE)
+files[1]
+nwea <- load_csv(files[4])
+#nwea <- load_csv("./data-raw/raw_nwea/NWEA Tests Fall SY 2012-13.csv")
 eto <- load_csv("./data-raw/students_list.csv")
 
 
 # Clean data --------------------------------------------------------------
 
 nwea <- clean_nwea(nwea)
-
-
 
 # Merge data --------------------------------------------------------------
 
