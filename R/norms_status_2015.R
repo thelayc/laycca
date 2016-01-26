@@ -1,19 +1,19 @@
 #' NWEA Norms data 2015 (status)
 #'
-#' Data from the RIT Scale Norms Study 2015
+#' MODIFIED data from the RIT Scale Norms Study 2015: Gives the RIT score threshold for each percentile value from 1 to 99
 #'
 #' @source NWEA, Northwest Evaluation Association,
 #'  \url{https://legacysupport.nwea.org/support/article/norms-study-resources}
 #' @format Data frame with columns
 #' \describe{
-#' \item{season}{Term. Possible Values: 
+#' \item{season}{Term. Possible Values:
 #' 4 = Beginning of year (Fall),
 #' 1 = Middle of year (Winter),
 #' 2 = End of year (Spring),
 #' 3 = Norms not available for this season (Summer)"}
 #' \item{grade}{Focal grade (the grade regarded as the present grade of focus for the purposes of norms look-up)
 #' Grade 13 refers to kindergarten}
-#' \item{subject}{Measurement Scale.	Possible Values: 
+#' \item{subject}{Measurement Scale.	Possible Values:
 #' 1 = Mathematics,
 #' 2 = Reading,
 #' 3 = Language Usage
