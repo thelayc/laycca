@@ -1,3 +1,5 @@
+library(dplyr)
+
 norms_status_2015 <- read.csv('./data-raw/norms_status_2015.csv', stringsAsFactors = FALSE)
 
 
@@ -25,6 +27,10 @@ df <- plyr::ddply(df, c('season', 'grade', 'subject'), interp)
 
 norms_status_2015 <- df %>%
   select(season:subject, student_pctile, rit)
+
+norms_status_2015$season <- as.character(norms_status_2015$season)
+norms_status_2015$season <- plyr::revalue(norms_status_2015$season, 
+                                       c("4" = "fall", "1" = "winter", "2" = "spring", "3" = "summer"))
 
 # Save data
 devtools::use_data(norms_status_2015, overwrite = TRUE)
